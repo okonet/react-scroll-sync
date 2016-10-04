@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "lint-staged": "lint-staged"
+    "lint:fix": "npm run lint -- --fix",
+    "lint:staged": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
@@ -14,7 +15,7 @@
       "git add"
     ]
   },
-  "pre-commit": "lint-staged",
+  "pre-commit": "lint:staged",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okonet/react-sync-scroll.git"
