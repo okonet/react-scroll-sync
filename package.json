@@ -32,8 +32,13 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "peerDependencies": ["src/*.js"],
-        "devDependencies": ["**/*.test.js", "**/*.spec.js"]
+        "peerDependencies": [
+          "src/*.js"
+        ],
+        "devDependencies": [
+          "**/*.test.js",
+          "**/*.spec.js"
+        ]
       }
     ]
   },
