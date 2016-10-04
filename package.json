@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "styleguide:server": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "lint-staged": {
     "*.js": [
