@@ -1,7 +1,7 @@
 {
-  "name": "react-sync-scroll",
+  "name": "react-scroll-sync",
   "version": "0.1.0",
-  "description": "Synced scroll position across multiple scrollable elements",
+  "description": "Syncronize scroll positions across multiple scrollable containers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,15 +18,15 @@
   "pre-commit": "lint:staged",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okonet/react-sync-scroll.git"
+    "url": "git+https://github.com/okonet/react-scroll-sync.git"
   },
   "keywords": [],
   "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okonet/react-sync-scroll/issues"
+    "url": "https://github.com/okonet/react-scroll-sync/issues"
   },
-  "homepage": "https://github.com/okonet/react-sync-scroll#readme",
+  "homepage": "https://github.com/okonet/react-scroll-sync#readme",
   "eslintConfig": {
     "extends": "okonet",
     "import/no-extraneous-dependencies": [
