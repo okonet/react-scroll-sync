@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
     library: 'ScrollSync'
