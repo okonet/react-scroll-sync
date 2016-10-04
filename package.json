@@ -46,6 +46,11 @@
     ]
   },
   "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
     "eslint": "^3.7.1",
     "eslint-config-okonet": "^1.1.1",
     "jest": "^16.0.0",
