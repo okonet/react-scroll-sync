@@ -4,8 +4,17 @@
   "description": "Synced scroll position across multiple scrollable elements",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint-staged": "lint-staged"
   },
+  "lint-staged": {
+    "*.js" : [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint-staged",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okonet/react-sync-scroll.git"
@@ -16,5 +25,14 @@
   "bugs": {
     "url": "https://github.com/okonet/react-sync-scroll/issues"
   },
-  "homepage": "https://github.com/okonet/react-sync-scroll#readme"
+  "homepage": "https://github.com/okonet/react-sync-scroll#readme",
+  "eslintConfig": {
+    "extends": "esilnt-config-okonet"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.1",
+    "eslint-config-okonet": "^1.1.0",
+    "lint-staged": "^3.0.3",
+    "pre-commit": "^1.1.3"
+  }
 }
