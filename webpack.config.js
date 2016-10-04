@@ -27,6 +27,7 @@ module.exports = {
     extensions: ['', '.js', '.json']
   },
   externals: {
-    react: 'react'
+    react: 'react',
+    'react-dom': 'react-dom'
   }
 }
