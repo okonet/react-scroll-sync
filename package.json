@@ -9,7 +9,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.js" : [
+    "*.js": [
       "eslint --fix",
       "git add"
     ]
@@ -27,12 +27,27 @@
   },
   "homepage": "https://github.com/okonet/react-sync-scroll#readme",
   "eslintConfig": {
-    "extends": "esilnt-config-okonet"
+    "extends": "okonet",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "peerDependencies": ["src/*.js"],
+        "devDependencies": ["**/*.test.js", "**/*.spec.js"]
+      }
+    ]
   },
   "devDependencies": {
     "eslint": "^3.7.1",
-    "eslint-config-okonet": "^1.1.0",
+    "eslint-config-okonet": "^1.1.1",
+    "jest": "^16.0.0",
     "lint-staged": "^3.0.3",
-    "pre-commit": "^1.1.3"
+    "pre-commit": "^1.1.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-styleguidist": "^3.1.1"
+  },
+  "peerDependencies": {
+    "react": "15.x",
+    "react-dom": "15.x"
   }
 }
