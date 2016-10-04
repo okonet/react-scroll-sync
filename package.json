@@ -1,0 +1,20 @@
+{
+  "name": "react-sync-scroll",
+  "version": "0.1.0",
+  "description": "Synced scroll position across multiple scrollable elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okonet/react-sync-scroll.git"
+  },
+  "keywords": [],
+  "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okonet/react-sync-scroll/issues"
+  },
+  "homepage": "https://github.com/okonet/react-sync-scroll#readme"
+}
