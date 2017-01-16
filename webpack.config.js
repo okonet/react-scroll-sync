@@ -22,10 +22,6 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    // Can require('file') instead of require('file.js') etc.
-    extensions: ['', '.js', '.json']
-  },
   externals: {
     react: 'react',
     'react-dom': 'react-dom'
