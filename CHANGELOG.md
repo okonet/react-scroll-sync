@@ -1,3 +1,8 @@
+# 0.1.2
+
+- Setup styleguide
+- Update readme
+
 # 0.1.1
 
 - Fixed `main` field in package.json
