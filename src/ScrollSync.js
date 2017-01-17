@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
 /**
- * ScrollSync main provider component
+ * ScrollSync provider component
  *
- * @example ./ScrollSync.md
  */
 
 export default class ScrollSync extends Component {

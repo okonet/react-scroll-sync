@@ -1,3 +1,6 @@
+To use ScrollSync you have to wrap your scrollable content (ensure that you have `overflow: auto`
+ in CSS) in `ScrollSyncPane` and then wrap everything in `ScrollSync`.
+ 
 ```
 <ScrollSync>
   <div style={{ display: 'flex', position: 'relative', height: 300 }}>
@@ -16,7 +19,7 @@
     <ScrollSyncPane>
       <div style={{overflow: 'auto'}}>
         <section style={{ height: 1000 }}>
-          <h1>Right Pane Content</h1>
+          <h1>Middle Pane Content</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam doloribus
             dolorum
             est eum eveniet exercitationem iste labore minus, neque nobis odit officiis omnis
@@ -40,3 +43,5 @@
 </ScrollSync>
 ```
 
+Sometimes it is useful to attach the `onScroll` event listener to a different node (for example 
+to a `document.body`). Use `attachTo` prop for that.
