@@ -58,7 +58,9 @@ export default class ScrollSync extends Component {
   }
 
   syncScrollPositions = (scrolledPane) => {
-    const { scrollTop, scrollHeight, clientHeight } = scrolledPane
+    const { scrollTop, scrollHeight, clientHeight,
+      scrollLeft, scrollWidth, clientWidth } = scrolledPane
+
     this.panes.forEach((pane) => {
       /* For all panes beside the currently scrolling one */
       if (scrolledPane !== pane) {
@@ -66,8 +68,10 @@ export default class ScrollSync extends Component {
         this.removeEvents(pane)
         /* Calculate the actual pane height */
         const paneHeight = pane.scrollHeight - clientHeight
+        const paneWidth = pane.scrollWidth - clientWidth
         /* Adjust the scrollTop position of it accordingly */
         pane.scrollTop = (paneHeight * scrollTop) / (scrollHeight - clientHeight) // eslint-disable-line
+        pane.scrollLeft = (paneWidth * scrollLeft) / (scrollWidth - clientWidth) // eslint-disable-line
         /* Re-attach event listeners after we're done scrolling */
         window.requestAnimationFrame(() => {
           this.addEvents(pane)
