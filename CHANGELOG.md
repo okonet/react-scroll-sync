@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Support for horizontal scroll (#4)
+
 # 0.1.2
 
 - Setup styleguide
