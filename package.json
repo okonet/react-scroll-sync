@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
+    "start": "npm run styleguide:server",
     "styleguide:server": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
