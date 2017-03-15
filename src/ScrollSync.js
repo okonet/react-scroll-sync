@@ -1,27 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 
+import ScrollSyncPane from './internal/ScrollSyncPane'
+
 /**
  * ScrollSync provider component
  *
+ * @example ./example.md
  */
 
 export default class ScrollSync extends Component {
 
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.node.isRequired,
+    style: PropTypes.object
   };
-
-  static childContextTypes = {
-    registerPane: PropTypes.func,
-    unregisterPane: PropTypes.func
-  }
-
-  getChildContext() {
-    return {
-      registerPane: this.registerPane,
-      unregisterPane: this.unregisterPane
-    }
-  }
 
   panes = []
 
@@ -29,6 +21,9 @@ export default class ScrollSync extends Component {
     if (!this.findPane(node)) {
       this.addEvents(node)
       this.panes.push(node)
+    }
+    return () => {
+      this.unregisterPane(node)
     }
   }
 
@@ -81,6 +76,14 @@ export default class ScrollSync extends Component {
   }
 
   render() {
-    return React.Children.only(this.props.children)
+    return (<div style={{ overflow: 'hidden', ...this.props.style }}>
+      {
+        React.Children.map(this.props.children, child => (
+          <ScrollSyncPane register={this.registerPane}>
+            { child }
+          </ScrollSyncPane>
+        ))
+      }
+    </div>)
   }
 }
