@@ -1,7 +1,8 @@
 /* eslint react/no-find-dom-node: 0 */
 
-import { Component, PropTypes } from 'react'
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
 /**
  * ScrollSyncPane Component
