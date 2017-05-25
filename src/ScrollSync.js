@@ -9,7 +9,16 @@ import PropTypes from 'prop-types'
 export default class ScrollSync extends Component {
 
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
+    proportional: PropTypes.bool,
+    vertical: PropTypes.bool,
+    horizontal: PropTypes.bool
+  };
+
+  static defaultProps = {
+    proportional: true,
+    vertical: true,
+    horizontal: true
   };
 
   static childContextTypes = {
@@ -62,6 +71,8 @@ export default class ScrollSync extends Component {
     const { scrollTop, scrollHeight, clientHeight,
       scrollLeft, scrollWidth, clientWidth } = scrolledPane
 
+    const { proportional, vertical, horizontal } = this.props
+
     this.panes.forEach((pane) => {
       /* For all panes beside the currently scrolling one */
       if (scrolledPane !== pane) {
@@ -71,8 +82,12 @@ export default class ScrollSync extends Component {
         const paneHeight = pane.scrollHeight - clientHeight
         const paneWidth = pane.scrollWidth - clientWidth
         /* Adjust the scrollTop position of it accordingly */
-        pane.scrollTop = (paneHeight * scrollTop) / (scrollHeight - clientHeight) // eslint-disable-line
-        pane.scrollLeft = (paneWidth * scrollLeft) / (scrollWidth - clientWidth) // eslint-disable-line
+        if (vertical) {
+          pane.scrollTop = proportional ? (paneHeight * scrollTop) / (scrollHeight - clientHeight) : scrollTop // eslint-disable-line
+        }
+        if (horizontal) {
+          pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / (scrollWidth - clientWidth) : scrollLeft // eslint-disable-line
+        }
         /* Re-attach event listeners after we're done scrolling */
         window.requestAnimationFrame(() => {
           this.addEvents(pane)
