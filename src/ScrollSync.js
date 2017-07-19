@@ -68,8 +68,17 @@ export default class ScrollSync extends Component {
   }
 
   syncScrollPositions = (scrolledPane) => {
-    const { scrollTop, scrollHeight, clientHeight,
-      scrollLeft, scrollWidth, clientWidth } = scrolledPane
+    const {
+      scrollTop,
+      scrollHeight,
+      clientHeight,
+      scrollLeft,
+      scrollWidth,
+      clientWidth
+    } = scrolledPane
+
+    const scrollTopOffset = scrollHeight - clientHeight
+    const scrollLeftOffset = scrollWidth - clientWidth
 
     const { proportional, vertical, horizontal } = this.props
 
@@ -82,11 +91,11 @@ export default class ScrollSync extends Component {
         const paneHeight = pane.scrollHeight - clientHeight
         const paneWidth = pane.scrollWidth - clientWidth
         /* Adjust the scrollTop position of it accordingly */
-        if (vertical) {
-          pane.scrollTop = proportional ? (paneHeight * scrollTop) / (scrollHeight - clientHeight) : scrollTop // eslint-disable-line
+        if (vertical && scrollTopOffset > 0) {
+          pane.scrollTop = proportional ? (paneHeight * scrollTop) / scrollTopOffset : scrollTop // eslint-disable-line
         }
-        if (horizontal) {
-          pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / (scrollWidth - clientWidth) : scrollLeft // eslint-disable-line
+        if (horizontal && scrollLeftOffset > 0) {
+          pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / scrollLeftOffset : scrollLeft // eslint-disable-line
         }
         /* Re-attach event listeners after we're done scrolling */
         window.requestAnimationFrame(() => {
