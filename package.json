@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-sync",
-  "version": "0.3.0",
+  "version": "0.0.0-development",
   "description": "Syncronize scroll positions across multiple scrollable containers",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
     "styleguide:server": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
     "*.js": [
@@ -23,7 +24,7 @@
   "pre-commit": "lint:staged",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okonet/react-scroll-sync.git"
+    "url": "https://github.com/okonet/react-scroll-sync.git"
   },
   "keywords": [],
   "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
@@ -67,7 +68,8 @@
     "react-dom": "^15.3.2",
     "react-styleguidist": "^5.0.0-beta8",
     "rimraf": "^2.5.4",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "semantic-release": "^6.3.6"
   },
   "peerDependencies": {
     "react": "0.14.x || 15.x",
