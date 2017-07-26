@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "npm run clean && webpack",
-    "prerelease": "npm run lint && npm run build",
-    "release": "npmpub",
+    "prebuild": "npm run lint",
+    "build": "NODE_ENV=production npm run clean && webpack",
+    "prepublish": "npm run build",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
