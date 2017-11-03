@@ -15,12 +15,12 @@ MIT
 
 ## Installation
 
-```
+```bash
 npm install --save react-scroll-sync
 ```
 ## Usage
 
-```
+```jsx
 import React, {Component} from 'react';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
