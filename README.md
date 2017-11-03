@@ -24,7 +24,7 @@ npm install --save react-scroll-sync
 import React, {Component} from 'react';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
-export default class VirtualGrid extends Component {
+export default class MyComponent extends Component {
     
     render() {
       <ScrollSync>
