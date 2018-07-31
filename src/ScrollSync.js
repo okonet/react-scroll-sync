@@ -12,13 +12,15 @@ export default class ScrollSync extends Component {
     children: PropTypes.element.isRequired,
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
-    horizontal: PropTypes.bool
+    horizontal: PropTypes.bool,
+    enabled: PropTypes.bool
   };
 
   static defaultProps = {
     proportional: true,
     vertical: true,
-    horizontal: true
+    horizontal: true,
+    enabled: true
   };
 
   static childContextTypes = {
@@ -72,6 +74,10 @@ export default class ScrollSync extends Component {
   }
 
   handlePaneScroll = (node, group) => {
+    if (!this.props.enabled) {
+      return;
+    }
+
     window.requestAnimationFrame(() => {
       this.syncScrollPositions(node, group)
     })
