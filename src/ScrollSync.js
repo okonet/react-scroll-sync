@@ -75,7 +75,7 @@ export default class ScrollSync extends Component {
 
   handlePaneScroll = (node, group) => {
     if (!this.props.enabled) {
-      return;
+      return
     }
 
     window.requestAnimationFrame(() => {
