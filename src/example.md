@@ -1,5 +1,7 @@
 To use ScrollSync you have to wrap your scrollable content (ensure that you have `overflow: auto`
  in CSS) in `ScrollSyncPane` and then wrap everything in `ScrollSync`.
+
+If you want to provide a toggle for users to turn the scroll syncing on and off, you can use the `enabled={false}` setting on the main `ScrollSync` element. Note that this disables the scroll syncing for all groups.
  
 ```
 <ScrollSync>
@@ -102,3 +104,4 @@ Provide an arbitrary group name in the `group` prop to ScrollSyncPane components
   </div>
 </ScrollSync>
 ```
+
