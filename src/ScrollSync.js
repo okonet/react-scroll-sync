@@ -37,30 +37,34 @@ export default class ScrollSync extends Component {
 
   panes = {}
 
-  registerPane = (node, group) => {
-    if (!this.panes[group]) {
-      this.panes[group] = []
-    }
-
-    if (!this.findPane(node, group)) {
-      if (this.panes[group].length > 0) {
-        this.syncScrollPosition(this.panes[group][0], node)
+  registerPane = (node, groups) => {
+    groups.forEach((group) => {
+      if (!this.panes[group]) {
+        this.panes[group] = []
       }
-      this.addEvents(node, group)
-      this.panes[group].push(node)
-    }
+
+      if (!this.findPane(node, group)) {
+        if (this.panes[group].length > 0) {
+          this.syncScrollPosition(this.panes[group][0], node)
+        }
+        this.panes[group].push(node)
+      }
+    })
+    this.addEvents(node, groups)
   }
 
-  unregisterPane = (node, group) => {
-    if (this.findPane(node, group)) {
-      this.removeEvents(node)
-      this.panes[group].splice(this.panes[group].indexOf(node), 1)
-    }
+  unregisterPane = (node, groups) => {
+    groups.forEach((group) => {
+      if (this.findPane(node, group)) {
+        this.removeEvents(node)
+        this.panes[group].splice(this.panes[group].indexOf(node), 1)
+      }
+    })
   }
 
-  addEvents = (node, group) => {
+  addEvents = (node, groups) => {
     /* For some reason element.addEventListener doesnt work with document.body */
-    node.onscroll = this.handlePaneScroll.bind(this, node, group) // eslint-disable-line
+    node.onscroll = this.handlePaneScroll.bind(this, node, groups) // eslint-disable-line
   }
 
   removeEvents = (node) => {
@@ -76,13 +80,13 @@ export default class ScrollSync extends Component {
     return this.panes[group].find(pane => pane === node)
   }
 
-  handlePaneScroll = (node, group) => {
+  handlePaneScroll = (node, groups) => {
     if (!this.props.enabled) {
       return
     }
 
     window.requestAnimationFrame(() => {
-      this.syncScrollPositions(node, group)
+      this.syncScrollPositions(node, groups)
     })
   }
 
@@ -113,18 +117,20 @@ export default class ScrollSync extends Component {
     }
   }
 
-  syncScrollPositions = (scrolledPane, group) => {
-    this.panes[group].forEach((pane) => {
-      /* For all panes beside the currently scrolling one */
-      if (scrolledPane !== pane) {
-        /* Remove event listeners from the node that we'll manipulate */
-        this.removeEvents(pane, group)
-        this.syncScrollPosition(scrolledPane, pane)
-        /* Re-attach event listeners after we're done scrolling */
-        window.requestAnimationFrame(() => {
-          this.addEvents(pane, group)
-        })
-      }
+  syncScrollPositions = (scrolledPane, groups) => {
+    groups.forEach((group) => {
+      this.panes[group].forEach((pane) => {
+        /* For all panes beside the currently scrolling one */
+        if (scrolledPane !== pane) {
+          /* Remove event listeners from the node that we'll manipulate */
+          this.removeEvents(pane, group)
+          this.syncScrollPosition(scrolledPane, pane)
+          /* Re-attach event listeners after we're done scrolling */
+          window.requestAnimationFrame(() => {
+            this.addEvents(pane, groups)
+          })
+        }
+      })
     })
   }
 

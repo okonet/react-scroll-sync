@@ -18,7 +18,7 @@ export default class ScrollSyncPane extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     attachTo: PropTypes.object,
-    group: PropTypes.string,
+    group: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     enabled: PropTypes.bool
   }
 
@@ -28,29 +28,31 @@ export default class ScrollSyncPane extends Component {
   }
 
   static contextTypes = {
-    registerPane: PropTypes.func.isRequired,
-    unregisterPane: PropTypes.func.isRequired
-  };
+    registerPane: PropTypes.func,
+    unregisterPane: PropTypes.func
+  }
 
   componentDidMount() {
     if (this.props.enabled) {
       this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
-      this.context.registerPane(this.node, this.props.group)
+      this.context.registerPane(this.node, this.toArray(this.props.group))
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.enabled && this.props.group !== nextProps.group) {
-      this.context.unregisterPane(this.node, this.props.group)
-      this.context.registerPane(this.node, nextProps.group)
+      this.context.unregisterPane(this.node, this.toArray(this.props.group))
+      this.context.registerPane(this.node, this.toArray(nextProps.group))
     }
   }
 
   componentWillUnmount() {
     if (this.props.enabled) {
-      this.context.unregisterPane(this.node, this.props.group)
+      this.context.unregisterPane(this.node, this.toArray(this.props.group))
     }
   }
+
+  toArray = groups => [].concat(groups)
 
   render() {
     return this.props.children
