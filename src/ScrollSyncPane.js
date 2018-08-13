@@ -18,11 +18,13 @@ export default class ScrollSyncPane extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     attachTo: PropTypes.object,
-    group: PropTypes.string
+    group: PropTypes.string,
+    enabled: PropTypes.bool
   }
 
   static defaultProps = {
-    group: 'default'
+    group: 'default',
+    enabled: true
   }
 
   static contextTypes = {
@@ -31,19 +33,23 @@ export default class ScrollSyncPane extends Component {
   };
 
   componentDidMount() {
-    this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
-    this.context.registerPane(this.node, this.props.group)
+    if (this.props.enabled) {
+      this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
+      this.context.registerPane(this.node, this.props.group)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.group !== nextProps.group) {
+    if (this.props.enabled && this.props.group !== nextProps.group) {
       this.context.unregisterPane(this.node, this.props.group)
       this.context.registerPane(this.node, nextProps.group)
     }
   }
 
   componentWillUnmount() {
-    this.context.unregisterPane(this.node, this.props.group)
+    if (this.props.enabled) {
+      this.context.unregisterPane(this.node, this.props.group)
+    }
   }
 
   render() {
