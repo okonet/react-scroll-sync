@@ -39,10 +39,10 @@ export default class ScrollSyncPane extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.enabled && this.props.group !== nextProps.group) {
-      this.context.unregisterPane(this.node, this.toArray(this.props.group))
-      this.context.registerPane(this.node, this.toArray(nextProps.group))
+  componentDidUpdate(prevProps) {
+    if (this.props.enabled && this.props.group !== prevProps.group) {
+      this.context.unregisterPane(this.node, this.toArray(prevProps.group))
+      this.context.registerPane(this.node, this.toArray(this.props.group))
     }
   }
 
