@@ -52,29 +52,29 @@
     ]
   },
   "devDependencies": {
-    "babel-loader": "^6.2.5",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-1": "^6.16.0",
-    "eslint": "^3.7.1",
-    "eslint-config-okonet": "^1.1.1",
-    "jest": "^16.0.0",
-    "lint-staged": "^3.0.3",
-    "npmpub": "^3.1.0",
-    "pre-commit": "^1.1.3",
-    "prop-types": "^15.5.10",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-styleguidist": "^5.0.0-beta8",
-    "rimraf": "^2.5.4",
-    "webpack": "^1.13.2",
-    "semantic-release": "^6.3.6"
+    "babel-loader": "6.2.5",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-preset-es2015": "6.16.0",
+    "babel-preset-react": "6.16.0",
+    "babel-preset-stage-1": "6.16.0",
+    "eslint": "3.7.1",
+    "eslint-config-okonet": "1.1.1",
+    "jest": "16.0.0",
+    "lint-staged": "3.0.3",
+    "npmpub": "3.1.0",
+    "pre-commit": "1.1.3",
+    "prop-types": "15.5.10",
+    "react": "15.3.2",
+    "react-dom": "15.3.2",
+    "react-styleguidist": "5.0.0-beta8",
+    "rimraf": "2.5.4",
+    "webpack": "1.13.2",
+    "semantic-release": "6.3.6"
   },
   "peerDependencies": {
     "react": "0.14.x || 15.x || 16.x",
     "react-dom": "0.14.x || 15.x || 16.x",
-    "prop-types": "^15.x"
+    "prop-types": "15.x"
   },
   "dependencies": {}
 }
