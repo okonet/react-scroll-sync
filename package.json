@@ -1,7 +1,7 @@
 {
   "name": "react-scroll-sync",
   "version": "0.0.0-development",
-  "description": "Syncronize scroll positions across multiple scrollable containers",
+  "description": "Synchronize scroll positions across multiple scrollable containers",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf ./dist",
@@ -12,8 +12,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
     "styleguide:server": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "styleguide:build": "styleguidist build"
   },
   "lint-staged": {
     "*.js": [
@@ -68,8 +67,7 @@
     "react-dom": "15.3.2",
     "react-styleguidist": "5.0.0-beta8",
     "rimraf": "2.5.4",
-    "webpack": "1.13.2",
-    "semantic-release": "6.3.6"
+    "webpack": "1.13.2"
   },
   "peerDependencies": {
     "react": "0.14.x || 15.x || 16.x",
