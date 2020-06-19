@@ -9,6 +9,12 @@ import PropTypes from 'prop-types'
 export default class ScrollSync extends Component {
 
   static propTypes = {
+    /**
+     * Callback to be invoked any time synchronization happens
+     *
+     * @param {Element} el The element that has received the scroll event
+     */
+    onSync: PropTypes.func,
     children: PropTypes.element.isRequired,
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
@@ -132,6 +138,7 @@ export default class ScrollSync extends Component {
         }
       })
     })
+    if (this.props.onSync) this.props.onSync(scrolledPane)
   }
 
   render() {
