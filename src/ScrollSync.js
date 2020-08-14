@@ -50,7 +50,7 @@ export default class ScrollSync extends Component {
     }
   }
 
-  panes = {};
+  panes = {}
 
   registerPane = (node, groups) => {
     groups.forEach((group) => {
@@ -66,7 +66,7 @@ export default class ScrollSync extends Component {
       }
     })
     this.addEvents(node, groups)
-  };
+  }
 
   unregisterPane = (node, groups) => {
     groups.forEach((group) => {
@@ -75,17 +75,17 @@ export default class ScrollSync extends Component {
         this.panes[group].splice(this.panes[group].indexOf(node), 1)
       }
     })
-  };
+  }
 
   addEvents = (node, groups) => {
     /* For some reason element.addEventListener doesnt work with document.body */
     node.onscroll = this.handlePaneScroll.bind(this, node, groups); // eslint-disable-line
-  };
+  }
 
   removeEvents = (node) => {
     /* For some reason element.removeEventListener doesnt work with document.body */
-    node.onscroll = null; // eslint-disable-line
-  };
+    node.onscroll = null // eslint-disable-line
+  }
 
   findPane = (node, group) => {
     if (!this.panes[group]) {
@@ -93,7 +93,7 @@ export default class ScrollSync extends Component {
     }
 
     return this.panes[group].find(pane => pane === node)
-  };
+  }
 
   handlePaneScroll = (node, groups) => {
     if (!this.props.enabled) {
@@ -135,14 +135,14 @@ export default class ScrollSync extends Component {
       // eslint-disable-next-line curly
       else pane.scrollTop = proportional
           ? (paneHeight * scrollTop) / scrollTopOffset
-          : scrollTop; // eslint-disable-line
+          : scrollTop // eslint-disable-line
     }
     if (horizontal && scrollLeftOffset > 0) {
       if (!this.state.initialized) pane.scrollLeft = initialScrollLeft
       // eslint-disable-next-line curly
       else pane.scrollLeft = proportional
           ? (paneWidth * scrollLeft) / scrollLeftOffset
-          : scrollLeft; // eslint-disable-line
+          : scrollLeft // eslint-disable-line
     }
     if (!this.state.initialized) this.state.initialized = true
   }
@@ -163,7 +163,7 @@ export default class ScrollSync extends Component {
       })
     })
     if (this.props.onSync) this.props.onSync(scrolledPane)
-  };
+  }
 
   render() {
     return React.Children.only(this.props.children)
