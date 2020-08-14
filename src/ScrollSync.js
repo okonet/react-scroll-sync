@@ -79,7 +79,7 @@ export default class ScrollSync extends Component {
 
   addEvents = (node, groups) => {
     /* For some reason element.addEventListener doesnt work with document.body */
-    node.onscroll = this.handlePaneScroll.bind(this, node, groups); // eslint-disable-line
+    node.onscroll = this.handlePaneScroll.bind(this, node, groups) // eslint-disable-line
   }
 
   removeEvents = (node) => {
@@ -103,7 +103,7 @@ export default class ScrollSync extends Component {
     window.requestAnimationFrame(() => {
       this.syncScrollPositions(node, groups)
     })
-  };
+  }
 
   syncScrollPosition(scrolledPane, pane) {
     const {
