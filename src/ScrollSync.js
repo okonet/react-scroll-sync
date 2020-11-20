@@ -83,7 +83,7 @@ export default class ScrollSync extends Component {
       return false
     }
 
-    return this.panes[group].find(pane => pane === node)
+    return this.panes[group].filter(pane => pane === node)[0]
   }
 
   handlePaneScroll = (node, groups) => {
