@@ -25,9 +25,9 @@ import React, {Component} from 'react';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
 export default class MyComponent extends Component {
-    
     render() {
-      <ScrollSync>
+    return (
+        <ScrollSync>
         <div style={{ display: 'flex', position: 'relative', height: 300 }}>
           <ScrollSyncPane>
             <div style={{overflow: 'auto'}}>
@@ -40,7 +40,7 @@ export default class MyComponent extends Component {
               </section>
             </div>
           </ScrollSyncPane>
-
+      
           <ScrollSyncPane>
             <div style={{overflow: 'auto'}}>
               <section style={{ height: 1000 }}>
@@ -52,7 +52,7 @@ export default class MyComponent extends Component {
               </section>
             </div>
           </ScrollSyncPane>
-
+      
           <ScrollSyncPane>
             <div style={{overflow: 'auto'}}>
               <section style={{ height: 2000 }}>
@@ -66,8 +66,6 @@ export default class MyComponent extends Component {
           </ScrollSyncPane>
         </div>
       </ScrollSync>
-
-        );
-    }
+    )}
 }
 ```
