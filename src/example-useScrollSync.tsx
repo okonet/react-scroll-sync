@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { useScrollSync } from "react-scroll-sync";
+import { useElement, useScrollSync } from "react-scroll-sync";
 
-const App: React.FC = () => {
+const App = () => {
   const [count, setCount] = React.useState(0);
 
-  const theadRef = React.useRef<HTMLDivElement>(null);
-  const tbodyRef = React.useRef<HTMLDivElement>(null);
-  useScrollSync([theadRef, tbodyRef], { axis: "horizontal" });
+  const [thead, theadRef] = useElement();
+  const [tbody, tbodyRef] = useElement();
+  useScrollSync([thead, tbody], { axis: "horizontal" });
 
   return (
     <article

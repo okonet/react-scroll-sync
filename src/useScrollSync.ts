@@ -1,5 +1,4 @@
-import type React from "react";
-import { useEffect } from "react";
+import React from "react";
 
 interface Options {
   proportional?: boolean;
@@ -7,27 +6,24 @@ interface Options {
 }
 
 export const useScrollSync = (
-  refs: React.MutableRefObject<HTMLElement | null>[],
+  elements: HTMLElement[],
   { proportional = true, axis = "both" }: Options = {}
 ): void => {
-  useEffect(() => {
-    const nodes = refs
-      .map((ref) => ref.current)
-      .filter((n) => n !== null) as HTMLElement[];
-    nodes.map((node) => {
-      node.onscroll = () =>
-        handleScroll(
-          node,
-          nodes.filter((n) => n !== node),
-          { proportional, axis }
-        );
+  React.useEffect(() => {
+    if (elements.length === 0) {
+      return;
+    }
+    elements.forEach((leader) => {
+      const followers = elements.filter((el) => el !== leader);
+      leader.onscroll = () =>
+        handleScroll(leader, followers, { proportional, axis });
     });
     return () => {
-      nodes.map((node) => {
-        node.onscroll = null;
+      elements.forEach((el) => {
+        el.onscroll = null;
       });
     };
-  }, []);
+  }, [elements, proportional, axis]);
 };
 
 const handleScroll = (
@@ -45,7 +41,7 @@ const syncFollowers = (
   followers: HTMLElement[],
   options: Options
 ) => {
-  followers.map((follower) => {
+  followers.forEach((follower) => {
     const { onscroll } = follower;
     follower.onscroll = null;
     syncFollower(leader, follower, options);
@@ -81,11 +77,11 @@ const syncFollower = (
   if ((axis === "both" || axis === "vertical") && scrollTopOffset > 0) {
     follower.scrollTop = proportional
       ? (paneHeight * scrollTop) / scrollTopOffset
-      : scrollTop; // eslint-disable-line
+      : scrollTop;
   }
   if ((axis === "both" || axis === "horizontal") && scrollLeftOffset > 0) {
     follower.scrollLeft = proportional
       ? (paneWidth * scrollLeft) / scrollLeftOffset
-      : scrollLeft; // eslint-disable-line
+      : scrollLeft;
   }
 };
