@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
  */
 
 export default class ScrollSync extends Component {
-
   static propTypes = {
     /**
      * Callback to be invoked any time synchronization happens
@@ -19,14 +18,18 @@ export default class ScrollSync extends Component {
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
     horizontal: PropTypes.bool,
-    enabled: PropTypes.bool
+    enabled: PropTypes.bool,
+    initialScrollLeft: PropTypes.number,
+    initialScrollTop: PropTypes.number
   };
 
   static defaultProps = {
     proportional: true,
     vertical: true,
     horizontal: true,
-    enabled: true
+    enabled: true,
+    initialScrollLeft: 0,
+    initialScrollTop: 0
   };
 
   static childContextTypes = {
@@ -34,6 +37,12 @@ export default class ScrollSync extends Component {
     unregisterPane: PropTypes.func
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      initialized: false
+    }
+  }
   getChildContext() {
     return {
       registerPane: this.registerPane,
@@ -109,18 +118,33 @@ export default class ScrollSync extends Component {
     const scrollTopOffset = scrollHeight - clientHeight
     const scrollLeftOffset = scrollWidth - clientWidth
 
-    const { proportional, vertical, horizontal } = this.props
+    const {
+      proportional,
+      vertical,
+      horizontal,
+      initialScrollTop,
+      initialScrollLeft
+    } = this.props
 
     /* Calculate the actual pane height */
     const paneHeight = pane.scrollHeight - clientHeight
     const paneWidth = pane.scrollWidth - clientWidth
     /* Adjust the scrollTop position of it accordingly */
     if (vertical && scrollTopOffset > 0) {
-      pane.scrollTop = proportional ? (paneHeight * scrollTop) / scrollTopOffset : scrollTop // eslint-disable-line
+      if (!this.state.initialized) pane.scrollTop = initialScrollTop
+      // eslint-disable-next-line curly
+      else pane.scrollTop = proportional
+          ? (paneHeight * scrollTop) / scrollTopOffset
+          : scrollTop // eslint-disable-line
     }
     if (horizontal && scrollLeftOffset > 0) {
-      pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / scrollLeftOffset : scrollLeft // eslint-disable-line
+      if (!this.state.initialized) pane.scrollLeft = initialScrollLeft
+      // eslint-disable-next-line curly
+      else pane.scrollLeft = proportional
+          ? (paneWidth * scrollLeft) / scrollLeftOffset
+          : scrollLeft // eslint-disable-line
     }
+    if (!this.state.initialized) this.state.initialized = true
   }
 
   syncScrollPositions = (scrolledPane, groups) => {
