@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Options {
-  mode: "proportional" | "absolute";
+  mode?: "proportional" | "absolute";
   axis?: "horizontal" | "vertical" | "both";
 }
 
@@ -10,17 +10,18 @@ interface Options {
  * When one of these elements is scrolled, the others will follow.
  *
  * @param elements - HTML elements to synchronize
- * @param options
- * @param options.mode -
+ * @param [options={}]
+ * @param [options.mode='proportional'] - Defaults to `'proportional'`.
  *  - If set to `'proportional'`, scroll is synchronized as a percentage.
  *    For example, scrolling one elemebt by 30% will cause other elements to scroll by 30%.
  *  - If set to `'absolute'`, scroll is synchronized as a pixel value.
  *    For example, scrolling one elemebt by 30px will cause other elements to scroll by 30px.
- * @param options.axis - Which axis should be syncronized for scrolling: `'horizontal'`, `'vertical'` or `'both'`.
+ * @param [options.axis='both'] - Defaults to `'both'`.
+ *  Which axis should be syncronized for scrolling: `'horizontal'`, `'vertical'` or `'both'`.
  */
 export const useScrollSync = (
   elements: HTMLElement[],
-  { mode, axis = "both" }: Options
+  { mode = "proportional", axis = "both" }: Options
 ): void => {
   React.useEffect(() => {
     if (elements.length === 0) {

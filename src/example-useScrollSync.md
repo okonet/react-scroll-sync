@@ -36,7 +36,7 @@ const MyComponent = () => {
   const [el1, el1Ref] = useElement();
   const [el2, el2Ref] = useElement();
   const [el3, el3Ref] = useElement();
-  useScrollSync([el1, el2, el3], { mode: "proportional" });
+  useScrollSync([el1, el2, el3]);
   return (
     <>
       <div ref={el1Ref} style={{ overflow: "auto" }}>
@@ -61,21 +61,28 @@ By default, both the x and y axes will be synchronized.
 If you want to target only the x or y axis, use the `axis` option:
 
 ```tsx
+// synchronize both axis [default]
+useScrollSync([el1, el2, el3], { axis: "both" });
+
 // synchronize x axis only
-useScrollSync([el1, el2, el3], { mode: "proportional", axis: "horizontal" });
+useScrollSync([el1, el2, el3], { axis: "horizontal" });
 
 // synchronize y axis only
-useScrollSync([el1, el2, el3], { mode: "proportional", axis: "vertical" });
+useScrollSync([el1, el2, el3], { axis: "vertical" });
 ```
 
 ### mode
 
-By default, element scrolling is synchronized by percentage.
+By default, elements are scrolled _proportionally_.
 So if one element is scrolled by 30%, the other synchronized elements will also scroll by 30%.
 
 An alternate mode is _absolute_ scrolling: if one element is scrolled by 30px,
 the other synchronized elements will also scroll by 30px. To use absolute scrolling:
 
 ```tsx
+// synchronize scroll proportionally (i.e. by percentage) [default]
+useScrollSync([el1, el2, el3], { mode: "proportional" });
+
+// synchronize scroll absolutely (i.e. by pixels)
 useScrollSync([el1, el2, el3], { mode: "absolute" });
 ```
