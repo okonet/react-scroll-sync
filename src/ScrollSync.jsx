@@ -138,8 +138,8 @@ export default class ScrollSync extends Component {
   }
 
   render() {
-    return (<ScrollSyncContext.Provider value={this.getContextValue()}>
+    return <ScrollSyncContext.Provider value={this.getContextValue()}>
       {React.Children.only(this.props.children)}
-    </ScrollSyncContext.Provider>)
+    </ScrollSyncContext.Provider>
   }
 }
