@@ -8,7 +8,7 @@
     "prebuild": "npm run lint",
     "build": "NODE_ENV=production npm run clean && webpack",
     "prepare": "npm run build",
-    "lint": "eslint .",
+    "lint": "eslint src --ext .js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
     "styleguide:server": "styleguidist server",
@@ -35,7 +35,8 @@
   "eslintConfig": {
     "extends": "okonet",
     "rules": {
-      "react/forbid-prop-types": 0
+      "react/forbid-prop-types": 0,
+      "react/jsx-wrap-multilines": 0
     },
     "import/no-extraneous-dependencies": [
       "error",
@@ -63,15 +64,15 @@
     "npmpub": "3.1.0",
     "pre-commit": "1.1.3",
     "prop-types": "15.5.10",
-    "react": "15.3.2",
-    "react-dom": "15.3.2",
-    "react-styleguidist": "5.0.0-beta8",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-styleguidist": "6.5.3",
     "rimraf": "2.5.4",
-    "webpack": "1.13.2"
+    "webpack": "2.7.0"
   },
   "peerDependencies": {
-    "react": "0.14.x || 15.x || 16.x || 17.x || 18.x",
-    "react-dom": "0.14.x || 15.x || 16.x || 17.x || 18.x"
+    "react": "16.x || 17.x || 18.x",
+    "react-dom": "16.x || 17.x || 18.x"
   },
   "dependencies": {
     "prop-types": "^15.5.7"

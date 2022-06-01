@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ScrollSyncContext from './support/ScrollSyncContext'
 
 /**
  * ScrollSync provider component
@@ -29,12 +30,7 @@ export default class ScrollSync extends Component {
     enabled: true
   };
 
-  static childContextTypes = {
-    registerPane: PropTypes.func,
-    unregisterPane: PropTypes.func
-  }
-
-  getChildContext() {
+  getContextValue() {
     return {
       registerPane: this.registerPane,
       unregisterPane: this.unregisterPane
@@ -142,6 +138,8 @@ export default class ScrollSync extends Component {
   }
 
   render() {
-    return React.Children.only(this.props.children)
+    return <ScrollSyncContext.Provider value={this.getContextValue()}>
+      {React.Children.only(this.props.children)}
+    </ScrollSyncContext.Provider>
   }
 }

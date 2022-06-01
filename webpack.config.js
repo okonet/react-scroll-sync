@@ -5,6 +5,9 @@ const path = require('path')
 module.exports = {
   entry: './src/index.js',
   devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.js',
@@ -17,7 +20,7 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'src')
         ],
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader'
       }
     ]

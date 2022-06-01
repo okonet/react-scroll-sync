@@ -3,6 +3,7 @@
 import { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import ScrollSyncContext from './support/ScrollSyncContext'
 
 /**
  * ScrollSyncPane Component
@@ -14,6 +15,7 @@ import PropTypes from 'prop-types'
 
 
 export default class ScrollSyncPane extends Component {
+  static contextType = ScrollSyncContext;
 
   static propTypes = {
     children: PropTypes.node.isRequired,
