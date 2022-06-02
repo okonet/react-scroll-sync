@@ -29,11 +29,6 @@ export default class ScrollSyncPane extends Component {
     enabled: true
   }
 
-  static contextTypes = {
-    registerPane: PropTypes.func,
-    unregisterPane: PropTypes.func
-  }
-
   componentDidMount() {
     if (this.props.enabled) {
       this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
