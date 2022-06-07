@@ -1,7 +1,6 @@
 /* eslint react/no-find-dom-node: 0 */
 
-import { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { Component, Children, createRef, cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import ScrollSyncContext from './support/ScrollSyncContext'
 
@@ -19,7 +18,10 @@ export default class ScrollSyncPane extends Component {
 
   static propTypes = {
     children: PropTypes.node.isRequired,
-    attachTo: PropTypes.object,
+    attachTo: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.any })
+    ]),
     group: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     enabled: PropTypes.bool
   }
@@ -29,34 +31,63 @@ export default class ScrollSyncPane extends Component {
     enabled: true
   }
 
-  static contextTypes = {
-    registerPane: PropTypes.func,
-    unregisterPane: PropTypes.func
+  constructor(props) {
+    super(props)
+    this.childRef = createRef()
   }
 
   componentDidMount() {
     if (this.props.enabled) {
-      this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
-      this.context.registerPane(this.node, this.toArray(this.props.group))
+      this.updateNode()
+      if (this.node) {
+        this.context.registerPane(this.node, this.toArray(this.props.group))
+      }
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.enabled && this.props.group !== prevProps.group) {
+    if (this.props.attachTo !== prevProps.attachTo) {
+      if (this.node) {
+        this.context.unregisterPane(this.node, this.toArray(prevProps.group))
+      }
+      this.updateNode()
+      if (this.node) {
+        this.context.registerPane(this.node, this.toArray(prevProps.group))
+      }
+    }
+    if (this.node && this.props.enabled !== prevProps.enabled) {
+      if (this.props.enabled) {
+        this.context.registerPane(this.node, this.toArray(prevProps.group))
+      } else {
+        this.context.unregisterPane(this.node, this.toArray(prevProps.group))
+      }
+    }
+    if (this.node && this.props.enabled && this.props.group !== prevProps.group) {
       this.context.unregisterPane(this.node, this.toArray(prevProps.group))
       this.context.registerPane(this.node, this.toArray(this.props.group))
     }
   }
 
   componentWillUnmount() {
-    if (this.props.enabled) {
+    if (this.node && this.props.enabled) {
       this.context.unregisterPane(this.node, this.toArray(this.props.group))
     }
   }
 
   toArray = groups => [].concat(groups)
 
+  updateNode = () => {
+    if (this.props.attachTo) {
+      this.node = this.props.attachTo.current
+    } else {
+      this.node = this.childRef.current
+    }
+  }
+
   render() {
-    return this.props.children
+    if (this.props.attachTo) {
+      return this.props.children
+    }
+    return cloneElement(Children.only(this.props.children), { ref: this.childRef })
   }
 }
