@@ -12,7 +12,6 @@ import ScrollSyncContext from './support/ScrollSyncContext'
  * @example ./example.md
  */
 
-
 export default class ScrollSyncPane extends Component {
   static contextType = ScrollSyncContext;
 
@@ -22,18 +21,26 @@ export default class ScrollSyncPane extends Component {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
-    group: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    enabled: PropTypes.bool
-  }
+    group: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
+    enabled: PropTypes.bool,
+    innerRef: PropTypes.oneOfType([// Either a function
+      PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) })])
+  };
 
   static defaultProps = {
     group: 'default',
     enabled: true
-  }
+  };
 
   constructor(props) {
     super(props)
-    this.childRef = createRef()
+
+    this.childRef = props.innerRef ? props.innerRef : createRef()
   }
 
   componentDidMount() {
@@ -62,7 +69,11 @@ export default class ScrollSyncPane extends Component {
         this.context.unregisterPane(this.node, this.toArray(prevProps.group))
       }
     }
-    if (this.node && this.props.enabled && this.props.group !== prevProps.group) {
+    if (
+      this.node &&
+      this.props.enabled &&
+      this.props.group !== prevProps.group
+    ) {
       this.context.unregisterPane(this.node, this.toArray(prevProps.group))
       this.context.registerPane(this.node, this.toArray(this.props.group))
     }
@@ -74,7 +85,7 @@ export default class ScrollSyncPane extends Component {
     }
   }
 
-  toArray = groups => [].concat(groups)
+  toArray = groups => [].concat(groups);
 
   updateNode = () => {
     if (this.props.attachTo) {
@@ -82,12 +93,14 @@ export default class ScrollSyncPane extends Component {
     } else {
       this.node = this.childRef.current
     }
-  }
+  };
 
   render() {
     if (this.props.attachTo) {
       return this.props.children
     }
-    return cloneElement(Children.only(this.props.children), { ref: this.childRef })
+    return cloneElement(Children.only(this.props.children), {
+      ref: this.childRef
+    })
   }
 }
