@@ -52,7 +52,7 @@ export default class ScrollSync extends Component {
         this.panes[group].push(node)
       }
     })
-    this.addEvents(node, groups)
+    this.addEvents(node)
   }
 
   unregisterPane = (node, groups) => {
@@ -64,9 +64,22 @@ export default class ScrollSync extends Component {
     })
   }
 
-  addEvents = (node, groups) => {
+  addEvents = (node) => {
     /* For some reason element.addEventListener doesnt work with document.body */
-    node.onscroll = this.handlePaneScroll.bind(this, node, groups) // eslint-disable-line
+    console.log("In add events")
+    console.log(node)
+    console.log(this.panes)
+    let nodeGroups = []
+    if(this.panes && typeof this.panes === "object"){
+      Object.keys(this.panes).forEach(pane => {
+        if (this.findNode(this.panes[pane], node)) nodeGroups.push(pane)
+      })
+      // if (this.findNode(this.panes.vertical, node)) nodeGroups.push("vertical")
+      // if (this.findNode(this.panes.horizontal, node)) nodeGroups.push("horizontal")
+      // if (this.findNode(this.panes.default, node)) nodeGroups.push("default")
+    }
+    node.onscroll = this.handlePaneScroll.bind(this, node, nodeGroups) // eslint-disable-line
+    console.log("In add events")
   }
 
   removeEvents = (node) => {
@@ -82,12 +95,22 @@ export default class ScrollSync extends Component {
     return this.panes[group].find(pane => pane === node)
   }
 
+  findNode = (pane, node) => {
+    if (!pane){
+      return false
+    }
+
+    return pane.find(n => n === node)
+  }
+
   handlePaneScroll = (node, groups) => {
     if (!this.props.enabled) {
       return
     }
 
     window.requestAnimationFrame(() => {
+      console.log(node)
+      console.log(groups)
       this.syncScrollPositions(node, groups)
     })
   }
@@ -107,6 +130,10 @@ export default class ScrollSync extends Component {
 
     const { proportional, vertical, horizontal } = this.props
 
+    console.log(proportional)
+    console.log(vertical)
+    console.log(horizontal)
+
     /* Calculate the actual pane height */
     const paneHeight = pane.scrollHeight - clientHeight
     const paneWidth = pane.scrollWidth - clientWidth
@@ -121,7 +148,9 @@ export default class ScrollSync extends Component {
 
   syncScrollPositions = (scrolledPane, groups) => {
     groups.forEach((group) => {
+      console.log(group)
       this.panes[group].forEach((pane) => {
+        console.log(pane)
         /* For all panes beside the currently scrolling one */
         if (scrolledPane !== pane) {
           /* Remove event listeners from the node that we'll manipulate */
@@ -129,7 +158,7 @@ export default class ScrollSync extends Component {
           this.syncScrollPosition(scrolledPane, pane)
           /* Re-attach event listeners after we're done scrolling */
           window.requestAnimationFrame(() => {
-            this.addEvents(pane, groups)
+            this.addEvents(pane)
           })
         }
       })
