@@ -1,2 +1,10 @@
-export { default as ScrollSync } from './ScrollSync'
-export { default as ScrollSyncPane } from './ScrollSyncPane'
+import { ScrollSync,ScrollSyncProps } from './ScrollSync';
+import { ScrollSyncPane,ScrollSyncPaneProps } from './ScrollSyncPane';
+
+export { ScrollSync, ScrollSyncPane, ScrollSyncProps, ScrollSyncPaneProps };
+
+// Add a default export
+export default {
+  ScrollSync,
+  ScrollSyncPane,
+};

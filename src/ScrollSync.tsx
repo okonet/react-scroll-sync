@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useCallback, useRef } from 'react';
 import { ScrollSyncContext } from './support/ScrollSyncContext';
 
-interface ScrollSyncProps {
+export interface ScrollSyncProps {
   onSync?: (el: HTMLElement) => void;
   proportional?: boolean;
   vertical?: boolean;
@@ -9,7 +9,7 @@ interface ScrollSyncProps {
   enabled?: boolean;
 }
 
-const ScrollSync: React.FC<PropsWithChildren<ScrollSyncProps>> = ({
+export const ScrollSync: React.FC<PropsWithChildren<ScrollSyncProps>> = ({
   children,
   onSync,
   proportional = true,
@@ -55,7 +55,7 @@ const ScrollSync: React.FC<PropsWithChildren<ScrollSyncProps>> = ({
   }, [proportional, vertical, horizontal]);
 
   const addEvents = useCallback((node: HTMLElement, groups: string[]) => {
-    node.onscroll = (event: Event) => {
+    node.onscroll = (_event: Event) => {
       if (!enabled) return;
       window.requestAnimationFrame(() => {
         syncScrollPositions(node, groups);
@@ -116,5 +116,3 @@ const ScrollSync: React.FC<PropsWithChildren<ScrollSyncProps>> = ({
     </ScrollSyncContext.Provider>
   );
 };
-
-export default ScrollSync;

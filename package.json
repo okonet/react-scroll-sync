@@ -1,80 +1,74 @@
 {
-  "name": "react-scroll-sync",
-  "version": "0.0.0-development",
-  "description": "Synchronize scroll positions across multiple scrollable containers",
-  "main": "dist/index.js",
-  "scripts": {
-    "clean": "rimraf ./dist",
-    "prebuild": "npm run lint",
-    "build": "NODE_ENV=production npm run clean && webpack",
-    "prepare": "npm run build",
-    "lint": "eslint src --ext .js,.jsx",
-    "lint:fix": "npm run lint -- --fix",
-    "lint:staged": "lint-staged",
-    "styleguide:server": "styleguidist server",
-    "styleguide:build": "styleguidist build"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "pre-commit": "lint:staged",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/okonet/react-scroll-sync.git"
-  },
-  "keywords": [],
-  "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/okonet/react-scroll-sync/issues"
-  },
-  "homepage": "https://github.com/okonet/react-scroll-sync#readme",
-  "eslintConfig": {
-    "extends": "okonet",
-    "rules": {
-      "react/forbid-prop-types": 0,
-      "react/jsx-wrap-multilines": 0
+    "name": "react-scroll-sync",
+    "version": "0.11.2",
+    "description": "Synchronize scroll positions across multiple scrollable containers",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.js"
+        }
     },
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "peerDependencies": [
-          "src/*.js"
-        ],
-        "devDependencies": [
-          "**/*.test.js",
-          "**/*.spec.js"
+    "scripts": {
+        "clean": "rimraf ./dist",
+        "prebuild": "npm run lint",
+        "build": "NODE_ENV=production npm run clean && webpack --config webpack.config.js",
+        "prepare": "NODE_ENV=production npm run build",
+        "lint": "eslint src --ext .ts,.tsx",
+        "lint:fix": "npm run lint -- --fix",
+        "lint:staged": "lint-staged",
+        "styleguide:server": "styleguidist server",
+        "styleguide:build": "styleguidist build"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "eslint --fix",
+            "git add"
         ]
-      }
-    ]
-  },
-  "devDependencies": {
-    "babel-loader": "6.2.5",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-preset-es2015": "6.16.0",
-    "babel-preset-react": "6.16.0",
-    "babel-preset-stage-1": "6.16.0",
-    "eslint": "3.7.1",
-    "eslint-config-okonet": "1.1.1",
-    "jest": "16.0.0",
-    "lint-staged": "3.0.3",
-    "npmpub": "3.1.0",
-    "pre-commit": "1.1.3",
-    "prop-types": "15.5.10",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "react-styleguidist": "6.5.3",
-    "rimraf": "2.5.4",
-    "webpack": "2.7.0"
-  },
-  "peerDependencies": {
-    "react": "16.x || 17.x || 18.x",
-    "react-dom": "16.x || 17.x || 18.x"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.7"
-  }
+    },
+    "pre-commit": "lint:staged",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/okonet/react-scroll-sync.git"
+    },
+    "keywords": [
+        "react",
+        "scroll",
+        "sync"
+    ],
+    "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/okonet/react-scroll-sync/issues"
+    },
+    "homepage": "https://github.com/okonet/react-scroll-sync#readme",
+    "devDependencies": {
+        "@babel/core": "^7.22.11",
+        "@babel/preset-env": "^7.22.10",
+        "@babel/preset-react": "^7.22.5",
+        "@babel/preset-typescript": "^7.22.11",
+        "@types/react": "^18.2.21",
+        "@types/react-dom": "^18.2.7",
+        "@typescript-eslint/eslint-plugin": "^8.18.0",
+        "@typescript-eslint/parser": "^8.18.0",
+        "babel-loader": "^9.1.3",
+        "babel-plugin-add-module-exports": "^1.0.4",
+        "eslint": "^8.48.0",
+        "eslint-config-okonet": "^1.1.1",
+        "lint-staged": "^14.0.1",
+        "pre-commit": "^1.2.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rimraf": "^5.0.1",
+        "ts-loader": "^9.4.3",
+        "typescript": "^5.2.2",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
+    },
+    "peerDependencies": {
+        "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+        "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
+    }
 }
