@@ -1,19 +1,23 @@
 {
     "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "lib": ["dom", "es2015", "es2017"],
-      "declaration": true,
-      "declarationDir": "./dist",
-      "sourceMap": true,
-      "outDir": "./dist",
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+      "allowJs": false,
+      "allowSyntheticDefaultImports": true,
       "strict": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "jsx": "react-jsx"
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "declaration": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true ,
+      "declarationMap": true,
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

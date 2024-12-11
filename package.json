@@ -1,34 +1,22 @@
 {
     "name": "react-scroll-sync",
     "version": "0.11.2",
-    "description": "Synchronize scroll positions across multiple scrollable containers",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "description": "A React component library built with Vite and TypeScript",
+    "type": "module",
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
     "exports": {
         ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/index.js"
+            "types": "./dist/index.d.ts",
+            "module": "./dist/index.mjs",
+            "main": "./dist/index.cjs.js",
+            "umd": "./dist/index.umd.js"
         }
     },
-    "scripts": {
-        "clean": "rimraf ./dist",
-        "prebuild": "npm run lint",
-        "build": "NODE_ENV=production npm run clean && webpack --config webpack.config.js",
-        "prepare": "NODE_ENV=production npm run build",
-        "lint": "eslint src --ext .ts,.tsx",
-        "lint:fix": "npm run lint -- --fix",
-        "lint:staged": "lint-staged",
-        "styleguide:server": "styleguidist server",
-        "styleguide:build": "styleguidist build"
-    },
-    "lint-staged": {
-        "*.{ts,tsx}": [
-            "eslint --fix",
-            "git add"
-        ]
-    },
-    "pre-commit": "lint:staged",
+    "files": [
+        "dist"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/okonet/react-scroll-sync.git"
@@ -44,31 +32,22 @@
         "url": "https://github.com/okonet/react-scroll-sync/issues"
     },
     "homepage": "https://github.com/okonet/react-scroll-sync#readme",
-    "devDependencies": {
-        "@babel/core": "^7.22.11",
-        "@babel/preset-env": "^7.22.10",
-        "@babel/preset-react": "^7.22.5",
-        "@babel/preset-typescript": "^7.22.11",
-        "@types/react": "^18.2.21",
-        "@types/react-dom": "^18.2.7",
-        "@typescript-eslint/eslint-plugin": "^8.18.0",
-        "@typescript-eslint/parser": "^8.18.0",
-        "babel-loader": "^9.1.3",
-        "babel-plugin-add-module-exports": "^1.0.4",
-        "eslint": "^8.48.0",
-        "eslint-config-okonet": "^1.1.1",
-        "lint-staged": "^14.0.1",
-        "pre-commit": "^1.2.2",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "rimraf": "^5.0.1",
-        "ts-loader": "^9.4.3",
-        "typescript": "^5.2.2",
-        "webpack": "^5.88.2",
-        "webpack-cli": "^5.1.4"
+    "scripts": {
+        "build": "rm -rf ./dist && tsc && vite build"
     },
     "peerDependencies": {
         "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
         "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
+    },
+    "dependencies": {
+        "@types/node": "^22.10.2",
+        "vite-plugin-dts": "^4.3.0",
+        "vite-tsconfig-paths": "^5.1.4"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.0",
+        "@vitejs/plugin-react": "^4.3.4",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.3"
     }
 }

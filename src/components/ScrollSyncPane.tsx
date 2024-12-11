@@ -1,13 +1,7 @@
-import React, {
-    Children,
-    ReactElement,
-    cloneElement,
-    useEffect,
-    useRef
-} from 'react';
-import { useScrollSyncContext } from './support/ScrollSyncContext';
-  
-export interface ScrollSyncPaneProps {
+import React, { Children, ReactElement, cloneElement, useEffect, useRef } from 'react';
+import { useScrollSyncContext } from '../context/ScrollSyncContext';
+
+interface ScrollSyncPaneProps {
     children: ReactElement;
     attachTo?: React.RefObject<HTMLElement> | ((node: HTMLElement) => void);
     group?: string | string[];
@@ -15,29 +9,26 @@ export interface ScrollSyncPaneProps {
     innerRef?: React.Ref<HTMLElement>;
 }
 
-export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
+const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
     children,
     attachTo,
     group = 'default',
     enabled = true,
-    innerRef
+    innerRef,
 }) => {
     const context = useScrollSyncContext();
     const childRef = useRef<HTMLElement | null>(null);
     const nodeRef = useRef<HTMLElement | null>(null);
 
-    const toArray = (groups: string | string[]): string[] => 
-        Array.isArray(groups) ? groups : [groups];
+    const toArray = (groups: string | string[]): string[] => (Array.isArray(groups) ? groups : [groups]);
 
     useEffect(() => {
         const updateNode = () => {
-        if (attachTo) {
-            nodeRef.current = typeof attachTo === 'function' 
-            ? null 
-            : attachTo.current;
-        } else {
-            nodeRef.current = childRef.current;
-        }
+            if (attachTo) {
+                nodeRef.current = typeof attachTo === 'function' ? null : attachTo.current;
+            } else {
+                nodeRef.current = childRef.current;
+            }
         };
 
         updateNode();
@@ -65,6 +56,9 @@ export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
             } else if (innerRef && 'current' in innerRef) {
                 (innerRef as React.MutableRefObject<HTMLElement | null>).current = node;
             }
-        }
+        },
     });
 };
+
+export { ScrollSyncPane };
+export type { ScrollSyncPaneProps };
