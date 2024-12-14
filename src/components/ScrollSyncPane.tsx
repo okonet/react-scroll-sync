@@ -9,6 +9,8 @@ export interface ScrollSyncPaneProps {
     innerRef?: React.Ref<HTMLElement>;
 }
 
+const castArray = (groups: string | string[]): string[] => (Array.isArray(groups) ? groups : [groups]);
+
 export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
     children,
     attachTo,
@@ -19,8 +21,6 @@ export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
     const context = useScrollSyncContext();
     const childRef = useRef<HTMLElement | null>(null);
     const nodeRef = useRef<HTMLElement | null>(null);
-
-    const toArray = (groups: string | string[]): string[] => (Array.isArray(groups) ? groups : [groups]);
 
     useEffect(() => {
         const updateNode = () => {
@@ -34,12 +34,12 @@ export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
         updateNode();
 
         if (enabled && nodeRef.current) {
-            context.registerPane(nodeRef.current, toArray(group));
+            context.registerPane(nodeRef.current, castArray(group));
         }
 
         return () => {
             if (enabled && nodeRef.current) {
-                context.unregisterPane(nodeRef.current, toArray(group));
+                context.unregisterPane(nodeRef.current, castArray(group));
             }
         };
     }, [attachTo, group, enabled, context]);
