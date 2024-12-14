@@ -1,7 +1,7 @@
 {
     "name": "react-scroll-sync",
     "version": "0.11.2",
-    "description": "A React component library built with Vite and TypeScript",
+    "description": "Synchronize scroll positions across multiple scrollable containers",
     "type": "module",
     "types": "./dist/index.d.ts",
     "main": "./dist/index.mjs",
@@ -26,28 +26,43 @@
         "scroll",
         "sync"
     ],
-    "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
+    "author": "Andrey Okonetchnikov <andrey@okonet.dev>",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/okonet/react-scroll-sync/issues"
     },
     "homepage": "https://github.com/okonet/react-scroll-sync#readme",
     "scripts": {
-        "build": "rm -rf ./dist && tsc && vite build"
+        "clean": "rm -rf ./dist",
+        "prebuild": "npm run lint",
+        "build": "tsc && vite build",
+        "prepare": "npm run build",
+        "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+        "lint:fix": "npm run lint --fix",
+        "lint:staged": "lint-staged"
     },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "pre-commit": "lint:staged",
     "peerDependencies": {
         "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
         "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
     },
     "dependencies": {
         "@types/node": "^22.10.2",
-        "vite-plugin-dts": "^4.3.0",
-        "vite-tsconfig-paths": "^5.1.4"
+        "vite-plugin-dts": "^4.3.0"
     },
     "devDependencies": {
+        "@eslint/js": "^9.17.0",
         "@types/react": "^18.0.0",
-        "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "^9.17.0",
         "typescript": "^5.7.2",
-        "vite": "^6.0.3"
+        "typescript-eslint": "^8.18.0",
+        "vite": "^6.0.3",
+        "@vitejs/plugin-react": "^4.3.4"
     }
 }

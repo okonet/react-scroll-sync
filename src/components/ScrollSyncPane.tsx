@@ -1,7 +1,7 @@
 import React, { Children, ReactElement, cloneElement, useEffect, useRef } from 'react';
 import { useScrollSyncContext } from '../context/ScrollSyncContext';
 
-interface ScrollSyncPaneProps {
+export interface ScrollSyncPaneProps {
     children: ReactElement;
     attachTo?: React.RefObject<HTMLElement> | ((node: HTMLElement) => void);
     group?: string | string[];
@@ -9,7 +9,7 @@ interface ScrollSyncPaneProps {
     innerRef?: React.Ref<HTMLElement>;
 }
 
-const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
+export const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
     children,
     attachTo,
     group = 'default',
@@ -59,6 +59,3 @@ const ScrollSyncPane: React.FC<ScrollSyncPaneProps> = ({
         },
     });
 };
-
-export { ScrollSyncPane };
-export type { ScrollSyncPaneProps };

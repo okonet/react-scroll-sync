@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import packageJson from './package.json';
 
-export default defineConfig((configEnv) => ({
+export default defineConfig(() => ({
   plugins: [
     react(),
     dts(),

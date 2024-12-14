@@ -1,6 +1,4 @@
-import { ScrollSyncPane } from './components/ScrollSyncPane';
-import { ScrollSync } from './components/ScrollSync';
-import type { ScrollSyncProps } from './components/ScrollSync';
-import type { ScrollSyncPaneProps } from './components/ScrollSyncPane';
-
-export { ScrollSync, ScrollSyncPane, ScrollSyncProps, ScrollSyncPaneProps };
+export { ScrollSyncPane } from './components/ScrollSyncPane';
+export { ScrollSync } from './components/ScrollSync';
+export type { ScrollSyncProps } from './components/ScrollSync';
+export type { ScrollSyncPaneProps } from './components/ScrollSyncPane';
