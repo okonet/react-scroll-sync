@@ -35,7 +35,7 @@
     "scripts": {
         "clean": "rm -rf ./dist",
         "prebuild": "npm run lint",
-        "build": "tsc && vite build",
+        "build": "npm ci && tsc && vite build",
         "prepare": "npm run build",
         "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
         "lint:fix": "npm run lint --fix",
