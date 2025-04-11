@@ -3,11 +3,11 @@ Synced scroll position across multiple scrollable elements
 
 ## Demo
 
-http://react-sync-scroll.netlify.com/
+https://react-sync-scroll.netlify.app/
 
 ## Documentation & Example
 
-http://react-sync-scroll.netlify.com/
+https://react-sync-scroll.netlify.app/
 
 ## License
 
