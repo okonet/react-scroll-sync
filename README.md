@@ -66,8 +66,6 @@ export default class MyComponent extends Component {
           </ScrollSyncPane>
         </div>
       </ScrollSync>
-
-        );
     }
 }
 ```

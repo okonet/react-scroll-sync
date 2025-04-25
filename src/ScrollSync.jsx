@@ -129,8 +129,8 @@ export default class ScrollSync extends Component {
           this.syncScrollPosition(scrolledPane, pane)
           /* Re-attach event listeners after we're done scrolling */
           window.requestAnimationFrame(() => {
-            const paneGroups = Object.keys(this.panes).filter((group) =>
-              this.panes[group].includes(pane)
+            const paneGroups = Object.keys(this.panes).filter(paneGroup =>
+              this.panes[paneGroup].includes(pane)
             )
             this.addEvents(pane, paneGroups)
           })
