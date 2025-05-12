@@ -1,2 +1,1 @@
-export { ScrollSync } from "./components/ScrollSync";
-export { ScrollSyncPane } from "./components/ScrollSyncPane";
+export * from "./components";

@@ -1,5 +1,6 @@
-import { ScrollSyncContext } from "@hooks/useScrollSyncContext";
-import React, { FC, PropsWithChildren, useCallback, useRef } from "react";
+import React, { FC, PropsWithChildren, useCallback, useRef } from 'react';
+
+import { ScrollSyncContext } from '../hooks/useScrollSyncContext';
 
 export interface ScrollSyncProps {
   enabled?: boolean;
@@ -8,11 +9,6 @@ export interface ScrollSyncProps {
   proportional?: boolean;
   vertical?: boolean;
 }
-
-/**
- * ScrollSync provider component
- *
- */
 
 export const ScrollSync: FC<PropsWithChildren<ScrollSyncProps>> = ({
   children,

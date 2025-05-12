@@ -1,21 +1,15 @@
-import { useScrollSyncContext } from "@hooks/useScrollSyncContext";
 import {
   cloneElement,
   FC,
   ReactElement,
   RefCallback,
   RefObject,
+  useCallback,
   useEffect,
   useRef,
-} from "react";
+} from 'react';
 
-/**
- * ScrollSyncPane Component
- *
- * Wrap your content in it to keep its scroll position in sync with other panes
- *
- * @example ./example.md
- */
+import { useScrollSyncContext } from '../hooks/useScrollSyncContext';
 
 export interface ScrollSyncPaneProps {
   attachTo?: RefCallback<HTMLElement> | RefObject<HTMLElement>;
@@ -33,35 +27,34 @@ export const ScrollSyncPane: FC<ScrollSyncPaneProps> = ({
   attachTo,
   children,
   enabled = true,
-  group = "default",
+  group = 'default',
   innerRef,
 }) => {
   const context = useScrollSyncContext();
   const childRef = useRef<HTMLElement | null>(null);
   const nodeRef = useRef<HTMLElement | null>(null);
 
-  const updateNode = () => {
+  const updateNode = useCallback(() => {
     if (attachTo) {
       nodeRef.current =
-        typeof attachTo === "function" ? null : attachTo.current;
+        typeof attachTo === 'function' ? null : attachTo.current;
     } else {
       nodeRef.current = childRef.current;
     }
-  };
-
-  updateNode();
+  }, [attachTo]);
 
   useEffect(() => {
+    updateNode();
+
     if (enabled && nodeRef.current) {
       context.registerPane(nodeRef.current, castArray(group));
     }
-
     return () => {
       if (enabled && nodeRef.current) {
         context.unregisterPane(nodeRef.current, castArray(group));
       }
     };
-  }, [context, enabled, group, attachTo]);
+  }, [context, enabled, group, attachTo, updateNode]);
 
   if (attachTo) {
     return children;
@@ -70,7 +63,7 @@ export const ScrollSyncPane: FC<ScrollSyncPaneProps> = ({
   return cloneElement(children, {
     ref: (node: HTMLElement | null) => {
       childRef.current = node;
-      if (typeof innerRef === "function") {
+      if (typeof innerRef === 'function') {
         innerRef(node);
       } else if (innerRef && node) {
         innerRef.current = node;

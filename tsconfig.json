@@ -16,12 +16,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "declarationMap": true,
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"]
-    }
+    "declarationMap": true
   },
   "include": ["src"]
 }

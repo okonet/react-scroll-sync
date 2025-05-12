@@ -1,4 +1,10 @@
 {
   "extend": "./tsconfig.json",
-  "include": ["src", "tsup.config.ts"]
+  "include": [
+    "src",
+    "tsup.config.ts",
+    ".storybook/*",
+    "stories/*",
+    "lint-staged.config.mjs"
+  ]
 }
