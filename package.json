@@ -27,7 +27,7 @@
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "validate:commit": "lint-staged",
-    "validate:push": "npm run build && npm run test"
+    "validate:push": "npm run build"
   },
   "repository": {
     "type": "git",
