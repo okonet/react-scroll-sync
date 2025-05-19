@@ -12,11 +12,34 @@ import {
 import { useScrollSyncContext } from '../hooks/useScrollSyncContext';
 
 export interface ScrollSyncPaneProps {
+  /**
+   * Optionally attach scroll sync to an external HTMLElement ref or callback.
+   * If provided, the pane will sync scroll with this element instead of the child.
+   */
   attachTo?: RefCallback<HTMLElement> | RefObject<HTMLElement>;
+
+  /**
+   * The scrollable child element to be synchronized.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: ReactElement<any>;
+
+  /**
+   * Whether scroll synchronization is enabled for this pane.
+   * @default true
+   */
   enabled?: boolean;
+
+  /**
+   * Group or groups this pane belongs to for scroll synchronization.
+   * Panes in the same group will sync scroll positions.
+   * @default 'default'
+   */
   group?: string | string[];
+
+  /**
+   * Ref or callback to access the underlying HTMLElement of the pane.
+   */
   innerRef?: RefCallback<HTMLElement> | RefObject<HTMLElement>;
 }
 

@@ -3,13 +3,37 @@ import React, { FC, PropsWithChildren, useCallback, useRef } from 'react';
 import { ScrollSyncContext } from '../hooks/useScrollSyncContext';
 
 export interface ScrollSyncProps {
+  /**
+   * Whether scroll synchronization is enabled.
+   * @default true
+   */
   enabled?: boolean;
+
+  /**
+   * Enable horizontal scroll synchronization.
+   * @default true
+   */
   horizontal?: boolean;
+
+  /**
+   * Callback fired after panes are synchronized.
+   * Receives the scrolled HTMLElement as an argument.
+   */
   onSync?: (el: HTMLElement) => void;
+
+  /**
+   * Whether to synchronize scroll positions proportionally.
+   * If false, uses absolute scroll values.
+   * @default true
+   */
   proportional?: boolean;
+
+  /**
+   * Enable vertical scroll synchronization.
+   * @default true
+   */
   vertical?: boolean;
 }
-
 export const ScrollSync: FC<PropsWithChildren<ScrollSyncProps>> = ({
   children,
   enabled = true,
