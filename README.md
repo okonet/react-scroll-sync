@@ -10,6 +10,11 @@ https://react-sync-scroll.netlify.app/
 
 https://react-sync-scroll.netlify.app/
 
+## Migration from v0 to v1
+
+If you are upgrading from `react-scroll-sync` v0 to v1, please review the [Migration Guide](./MIGRATION.md).  
+Version 1.0.0 and above provide built-in TypeScript type definitions, so you **must uninstall the community `@types/react-scroll-sync` package** to avoid type conflicts. The guide includes all required steps to ensure a smooth upgrade.
+
 ## License
 
 MIT
